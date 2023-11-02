@@ -1,9 +1,10 @@
 import "./App.css";
+import Gallery from "./Components/Gallery";
 
 function App() {
   return (
     <>
-      <h3>Home page</h3>
+      <Gallery />
     </>
   );
 }
