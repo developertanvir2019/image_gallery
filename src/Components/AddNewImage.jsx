@@ -24,7 +24,7 @@ const AddNewImage = memo(({ className, setImageFiles }) => {
         ...imageFiles,
         {
           id: Math.floor(Math.random() * 10 + 100).toString(),
-          src: reader.result,
+          url: reader.result,
         },
       ]);
     };

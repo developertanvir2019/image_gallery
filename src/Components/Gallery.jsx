@@ -19,7 +19,7 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import AddNewImage from "./AddNewImage";
-import Title from "./Title";
+import Navbar from "./Navbar";
 import images from "../assets/imglinks.json";
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(images);
@@ -107,7 +107,7 @@ const Gallery = () => {
     <>
       <div className="relative mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
         {/* title portion */}
-        <Title
+        <Navbar
           marked={marked}
           handleMarkAll={handleMarkAll}
           handleUnmarkAll={handleUnmarkAll}
@@ -153,7 +153,7 @@ const Gallery = () => {
                 {!!activeElm && (
                   <img
                     className="aspect-square w-full object-contain"
-                    src={activeElm.src}
+                    src={activeElm.url}
                     alt={activeElm.id}
                   />
                 )}
