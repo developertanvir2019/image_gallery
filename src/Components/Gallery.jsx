@@ -20,7 +20,7 @@ import {
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import AddNewImage from "./AddNewImage";
 import Title from "./Title";
-import images from "../../public/imglinks.json";
+import images from "../assets/imglinks.json";
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(images);
   const [marked, setMarked] = useState([]);
