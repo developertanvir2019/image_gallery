@@ -60,15 +60,6 @@ const Gallery = () => {
       setMarked(marked.filter((item) => item !== id));
     }
   };
-
-  // const handleMarkAll = () => {
-  //   setMarked(imageFiles.map((img) => img.id));
-  // };
-
-  // const handleUnmarkAll = () => {
-  //   setMarked([]);
-  // };
-
   useEffect(() => {
     if (selectAll) {
       setMarked(imageFiles.map((img) => img.id));
@@ -114,7 +105,7 @@ const Gallery = () => {
 
   return (
     <>
-      <div className="relative mx-auto max-w-[56rem] rounded-xl border bg-gradient-to-b from-gray-100 from-0% to-gray-200 to-100% shadow-lg">
+      <div className="relative mx-auto max-w-[72rem] rounded-xl border bg-gray-100 ">
         {/* title portion */}
         <Navbar
           marked={marked}

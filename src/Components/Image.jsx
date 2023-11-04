@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { defaultAnimateLayoutChanges, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Switch, Transition } from "@headlessui/react";
+import { Switch } from "@headlessui/react";
 import { memo, useState } from "react";
 import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2";
 
@@ -67,61 +67,82 @@ const Image = memo((props) => {
       ref={setNodeRef}
       style={style}
     >
-      <img
-        className={`aspect-square w-full object-contain transition-transform duration-300 ${
-          isHovered && !isDragging ? "scale-105" : ""
-        }`}
-        src={image?.url}
-        alt={image?.url}
-      />
-
-      {/* Overlay for buttons */}
-      <Transition
-        show={isHovered || isMarked}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-0"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div
-          className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
-            isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
+      <div className="relative group">
+        <img
+          className={`aspect-square w-full object-contain transition-transform duration-300 ${
+            isHovered && !isDragging ? "scale-105" : ""
           }`}
-        >
-          <div>
-            {!featured && isHovered && (
-              <button
-                className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
-                onClick={() => {
-                  setIsHovered(false);
-                  handleFeatured(image.id);
-                }}
-              >
-                <HiOutlineStar className="fill-inherit" />
-              </button>
-            )}
-          </div>
-          <div>
-            <Switch
-              checked={isMarked}
-              onChange={(bool) => handleMarked(image.id, bool)}
-              name={image.id}
-              className={`${
-                isMarked ? "" : ""
-              } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
+          src={image?.url}
+          alt={image?.url}
+        />
+
+        {isMarked ? (
+          <div className="absolute inset-0 flex items-center justify-center  opacity-100 bg-black bg-opacity-10 transition-opacity">
+            <div
+              className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
+                isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
+              }`}
             >
-              <span className="sr-only">Mark Image file for deletion</span>
-              <HiMiniCheckCircle
-                className={`fill-current ${
-                  isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
-                }`}
-              />
-            </Switch>
+              <div>
+                <Switch
+                  checked={isMarked}
+                  onChange={(bool) => handleMarked(image.id, bool)}
+                  name={image.id}
+                  className={`${
+                    isMarked ? "" : ""
+                  } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
+                >
+                  <span className="sr-only">Mark Image file for deletion</span>
+                  <HiMiniCheckCircle
+                    className={`fill-current ${
+                      isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
+                    }`}
+                  />
+                </Switch>
+              </div>
+            </div>
           </div>
-        </div>
-      </Transition>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black bg-opacity-40 transition-opacity">
+            <div
+              className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
+                isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
+              }`}
+            >
+              <div>
+                {!featured && isHovered && (
+                  <button
+                    className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
+                    onClick={() => {
+                      setIsHovered(false);
+                      handleFeatured(image.id);
+                    }}
+                  >
+                    <HiOutlineStar className="fill-inherit" />
+                  </button>
+                )}
+              </div>
+              <div>
+                <Switch
+                  checked={isMarked}
+                  onChange={(bool) => handleMarked(image.id, bool)}
+                  name={image.id}
+                  className={`${
+                    isMarked ? "" : ""
+                  } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
+                >
+                  <span className="sr-only">Mark Image file for deletion</span>
+                  <HiMiniCheckCircle
+                    className={`fill-current ${
+                      isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
+                    }`}
+                  />
+                </Switch>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 });

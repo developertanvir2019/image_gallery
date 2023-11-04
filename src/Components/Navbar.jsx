@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Transition } from "@headlessui/react";
 import { HiMiniCheckCircle } from "react-icons/hi2";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
   return (
-    <div className="sticky top-0 z-[1] flex min-h-[2.5rem] items-center gap-4 overflow-hidden border-b bg-gray-100 px-4 [&_*]:leading-6">
+    <div className="py-3 sticky top-0 z-[1] flex min-h-[2.5rem] items-center gap-4 overflow-hidden border-b bg-gray-100 px-5">
       <div>
         {!marked.length && (
           <h5 className="text-[1.5rem] font-semibold">Image Gallery</h5>
@@ -28,10 +29,10 @@ const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
           leaveTo="opacity-0 translate-y-full"
           className="flex gap-2 xl:gap-4"
         >
-          <label className="text-xl font-semibold">
+          <label className="text-lg font-semibold">
             <input
               type="checkbox"
-              className="toggle toggle-secondary -mb-1 mr-1"
+              className="toggle  -mb-1 mr-1"
               checked={selectAll}
               onClick={() => setSelectAll(!selectAll)}
             />
@@ -39,9 +40,11 @@ const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
           </label>
           <button
             onClick={handleDelete}
-            className="font-semibold text-danger hover:text-danger-hover hover:underline"
+            className="text-lg text-red-400 font-semibold"
           >
-            <small>Delete files</small>
+            <div className="flex items-center justify-center">
+              <AiOutlineDelete /> Delete
+            </div>
           </button>
         </Transition>
       </div>
