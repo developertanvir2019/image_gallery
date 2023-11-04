@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "./Image";
 import {
   DndContext,
@@ -25,6 +25,7 @@ const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(images);
   const [marked, setMarked] = useState([]);
   const [activeElm, setActiveElm] = useState(null);
+  const [selectAll, setSelectAll] = useState(false);
 
   // functions
   const sensors = useSensors(
@@ -60,13 +61,21 @@ const Gallery = () => {
     }
   };
 
-  const handleMarkAll = () => {
-    setMarked(imageFiles.map((img) => img.id));
-  };
+  // const handleMarkAll = () => {
+  //   setMarked(imageFiles.map((img) => img.id));
+  // };
 
-  const handleUnmarkAll = () => {
-    setMarked([]);
-  };
+  // const handleUnmarkAll = () => {
+  //   setMarked([]);
+  // };
+
+  useEffect(() => {
+    if (selectAll) {
+      setMarked(imageFiles.map((img) => img.id));
+    } else {
+      setMarked([]);
+    }
+  }, [imageFiles, selectAll]);
 
   const handleDelete = () => {
     if (!marked.length) return;
@@ -109,8 +118,8 @@ const Gallery = () => {
         {/* title portion */}
         <Navbar
           marked={marked}
-          handleMarkAll={handleMarkAll}
-          handleUnmarkAll={handleUnmarkAll}
+          selectAll={selectAll}
+          setSelectAll={setSelectAll}
           handleDelete={handleDelete}
         />
 
