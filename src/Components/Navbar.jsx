@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { HiMiniCheckCircle } from "react-icons/hi2";
 import { AiOutlineDelete } from "react-icons/ai";
+import { BsLinkedin, BsGithub, BsWhatsapp } from "react-icons/bs";
 
 const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
   return (
@@ -15,6 +16,27 @@ const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
             {marked.length} files selected
           </h6>
         )}
+      </div>
+
+      <div className="mx-auto flex justify-center gap-5 text-xl text-blue-500 font-bold">
+        <a
+          className="transform hover:scale-110 hover:text-blue-700 transition-transform duration-300 ease-in-out"
+          href="https://www.linkedin.com/in/tanvir2022/"
+        >
+          <BsLinkedin />
+        </a>
+        <a
+          className="transform hover:scale-110 hover:text-blue-700 transition-transform duration-300 ease-in-out"
+          href="https://github.com/developertanvir2019"
+        >
+          <BsGithub />
+        </a>
+        <a
+          className="transform hover:scale-110 hover:text-blue-700 transition-transform duration-300 ease-in-out"
+          href="https://wa.me/+8801641866230"
+        >
+          <BsWhatsapp />
+        </a>
       </div>
 
       <div className="ms-auto">
