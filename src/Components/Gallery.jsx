@@ -21,12 +21,13 @@ import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import AddNewImage from "./AddNewImage";
 import Navbar from "./Navbar";
 import images from "../assets/imglinks.json";
+import EditModal from "./EditModal";
 const Gallery = () => {
   const [imageFiles, setImageFiles] = useState(images);
   const [marked, setMarked] = useState([]);
   const [activeElm, setActiveElm] = useState(null);
   const [selectAll, setSelectAll] = useState(false);
-
+  const [modalClose, setModalClose] = useState(false);
   // functions
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
@@ -103,6 +104,12 @@ const Gallery = () => {
 
   const handleDragCancel = () => setActiveElm(null);
 
+  const [selectedImg, setSelectedImg] = useState(null);
+
+  const openModal = (img) => {
+    setSelectedImg(img);
+    document.getElementById("my_modal_3").showModal();
+  };
   return (
     <>
       <div className="relative mx-auto max-w-[72rem] rounded-xl border bg-gray-100 ">
@@ -140,6 +147,8 @@ const Gallery = () => {
                   isMarked={marked.includes(img.id)}
                   handleMarked={handleMarked}
                   handleFeatured={handleFeatured}
+                  openModal={() => openModal(img)}
+                  setModalClose={setModalClose}
                 />
               ))}
 
@@ -174,6 +183,11 @@ const Gallery = () => {
           </SortableContext>
         </DndContext>
       </div>
+      <EditModal
+        setModalClose={setModalClose}
+        modalClose={modalClose}
+        image={selectedImg}
+      />
     </>
   );
 };

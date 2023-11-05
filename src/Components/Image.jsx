@@ -4,7 +4,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Switch } from "@headlessui/react";
 import { memo, useState } from "react";
 import { HiMiniCheckCircle, HiOutlineStar } from "react-icons/hi2";
-
+import { GrEdit } from "react-icons/gr";
 const Image = memo((props) => {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -13,6 +13,8 @@ const Image = memo((props) => {
     featured,
     isMarked,
     handleMarked,
+    openModal,
+    setModalClose,
     handleFeatured,
     ...sanitizedProps
   } = props;
@@ -77,7 +79,7 @@ const Image = memo((props) => {
         />
 
         {isMarked ? (
-          <div className="absolute inset-0 flex items-center justify-center  opacity-100 bg-black bg-opacity-10 transition-opacity">
+          <div className="absolute inset-0 flex items-center justify-center  opacity-100 bg-black bg-opacity-5 transition-opacity">
             <div
               className={`overlay absolute inset-0 grid grid-flow-col place-content-between p-2  ${
                 isMarked ? "backdrop-brightness-105 backdrop-contrast-50" : ""
@@ -94,7 +96,7 @@ const Image = memo((props) => {
                 >
                   <span className="sr-only">Mark Image file for deletion</span>
                   <HiMiniCheckCircle
-                    className={`fill-current ${
+                    className={`fill-current text-blue-500 ${
                       isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
                     }`}
                   />
@@ -110,6 +112,32 @@ const Image = memo((props) => {
               }`}
             >
               <div>
+                <Switch
+                  checked={isMarked}
+                  onChange={(bool) => handleMarked(image.id, bool)}
+                  name={image.id}
+                  className={`${
+                    isMarked ? "" : ""
+                  } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
+                >
+                  <span className="sr-only">Mark Image file for deletion</span>
+                  <HiMiniCheckCircle
+                    className={`fill-current text-blue-500 ${
+                      isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
+                    }`}
+                  />
+                </Switch>
+              </div>
+              <button
+                className=" font-bold bg-yellow-100 rounded-full p-[0.4rem] flex justify-center items-center "
+                onClick={() => {
+                  openModal(image), setModalClose(true);
+                }}
+              >
+                <GrEdit />
+              </button>
+
+              <div>
                 {!featured && isHovered && (
                   <button
                     className="rounded-full bg-white fill-none text-2xl text-yellow-400 transition-colors hover:fill-current"
@@ -121,23 +149,6 @@ const Image = memo((props) => {
                     <HiOutlineStar className="fill-inherit" />
                   </button>
                 )}
-              </div>
-              <div>
-                <Switch
-                  checked={isMarked}
-                  onChange={(bool) => handleMarked(image.id, bool)}
-                  name={image.id}
-                  className={`${
-                    isMarked ? "" : ""
-                  } grid place-items-center rounded-full border bg-white text-2xl text-accent`}
-                >
-                  <span className="sr-only">Mark Image file for deletion</span>
-                  <HiMiniCheckCircle
-                    className={`fill-current ${
-                      isMarked ? "opacity-100" : "opacity-30 hover:opacity-50"
-                    }`}
-                  />
-                </Switch>
               </div>
             </div>
           </div>
