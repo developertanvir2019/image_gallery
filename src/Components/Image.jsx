@@ -88,7 +88,7 @@ const Image = memo((props) => {
               <div>
                 <Switch
                   checked={isMarked}
-                  onChange={(bool) => handleMarked(image.id, bool)}
+                  onChange={(boolean) => handleMarked(image.id, boolean)}
                   name={image.id}
                   className={`${
                     isMarked ? "" : ""

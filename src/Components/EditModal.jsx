@@ -7,7 +7,7 @@ const EditModal = ({ image, setModalClose, modalClose }) => {
   return (
     <div>
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+        <div className="modal-box w-11/12 max-w-3xl">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button
@@ -17,7 +17,7 @@ const EditModal = ({ image, setModalClose, modalClose }) => {
               ✕
             </button>
           </form>
-          <div style={{ height: "600px" }}>
+          <div className="mx-5" style={{ height: "500px" }}>
             {modalClose && (
               <PinturaEditor
                 {...editorConfig}

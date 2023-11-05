@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Transition } from "@headlessui/react";
 import { HiMiniCheckCircle } from "react-icons/hi2";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -19,34 +18,29 @@ const Title = ({ marked, handleDelete, selectAll, setSelectAll }) => {
       </div>
 
       <div className="ms-auto">
-        <Transition
-          show={!!marked.length}
-          enter="transition transform duration-75"
-          enterFrom="opacity-0 translate-y-full"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition transform duration-75 "
-          leaveFrom="opacity-100 translate-y-0"
-          leaveTo="opacity-0 translate-y-full"
-          className="flex gap-2 xl:gap-4"
-        >
-          <label className="text-lg font-semibold">
-            <input
-              type="checkbox"
-              className="toggle  -mb-1 mr-1"
-              checked={selectAll}
-              onClick={() => setSelectAll(!selectAll)}
-            />
-            Select All
-          </label>
-          <button
-            onClick={handleDelete}
-            className="text-lg text-red-400 font-semibold"
-          >
-            <div className="flex items-center justify-center">
-              <AiOutlineDelete /> Delete
-            </div>
-          </button>
-        </Transition>
+        {marked?.length ? (
+          <div>
+            <label className="text-lg font-semibold">
+              <input
+                type="checkbox"
+                className="toggle  -mb-1 mr-1"
+                checked={selectAll}
+                onClick={() => setSelectAll(!selectAll)}
+              />
+              Select All
+            </label>
+            <button
+              onClick={handleDelete}
+              className="text-lg text-red-400 font-semibold ml-3"
+            >
+              <div className="flex items-center justify-center">
+                <AiOutlineDelete /> Delete
+              </div>
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
